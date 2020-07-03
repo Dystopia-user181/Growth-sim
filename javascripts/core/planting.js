@@ -8,13 +8,14 @@ function unplant() {
 setInterval(function () {
 	player.plantUnpicked = player.plantUnpicked.add(1).add(player.plantUnpicked.min(player.bee));
 	if (player.plantUnpicked.gt(1000)) player.tutorial.unlockedHoneybee = true;
-	player.honey = player.honey.add(player.bee.min(player.plantUnpicked));
+	player.honey = player.honey.add(player.bee.min(player.plantUnpicked).pow(0.7));
 }, 1000);
 function sell() {
 	if (player.plantPicked.lte(0)) return;
 	player.plantPicked = player.plantPicked.sub(1);
 	player.money = player.money.add(plantSell/10);
 	if (player.money.gte(40)) player.tutorial.unlockedPot = true;
+	if (player.money.gte(1000)) player.tutorial.unlockedMarketing = true;
 }
 function buyCvt() {
 	if (player.money.lt(player.container.mul(5).add(20))) return;
